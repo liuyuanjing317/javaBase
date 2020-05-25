@@ -16,22 +16,22 @@ public class DoubleLinkedListDemo {
 		doubleLinkedList.add(hero2);
 		doubleLinkedList.add(hero3);
 		doubleLinkedList.add(hero4);
-		
+
 		doubleLinkedList.list();
-		
+
 		// 修改
 		HeroNode2 newHeroNode = new HeroNode2(4, "公孙胜", "入云龙");
 		doubleLinkedList.update(newHeroNode);
 		System.out.println("修改后的链表情况");
 		doubleLinkedList.list();
-		
+
 		// 删除
 		doubleLinkedList.del(3);
 		System.out.println("删除后的链表情况~~");
 		doubleLinkedList.list();
-		
-		
-		
+
+
+
 	}
 
 }
@@ -87,6 +87,40 @@ class DoubleLinkedList {
 		// 形成一个双向链表
 		temp.next = heroNode;
 		heroNode.pre = temp;
+	}
+
+
+	// 添加一个节点到双向链表的最后.
+	public void addByNo(HeroNode2 heroNode) {
+
+		// 因为head节点不能动，因此我们需要一个辅助遍历 temp
+		HeroNode2 temp = head;
+		Boolean flag=false;
+		// 遍历链表，找到最后
+		while (true) {
+			// 找到链表的最后
+			if (temp.next == null) {//
+				break;
+			}
+			if(temp.next.no>heroNode.no){
+				flag=true;
+				break;
+			}
+			if(temp.next.no == heroNode.no){
+				flag=false;
+				System.out.println("编号重复："+heroNode.no);
+				break;
+			}
+			// 如果没有找到最后, 将将temp后移
+			temp = temp.next;
+		}
+		if(flag){
+			//HeroNode2 hnode=temp.next;
+			temp.pre.next=heroNode;
+			heroNode.pre=temp.pre;
+			heroNode.next=temp;
+			temp.pre=heroNode;
+		}
 	}
 
 	// 修改一个节点的内容, 可以看到双向链表的节点内容修改和单向链表一样
