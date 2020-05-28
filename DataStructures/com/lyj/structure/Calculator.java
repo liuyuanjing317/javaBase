@@ -10,7 +10,7 @@ public class Calculator {
 
     //计算表达式的值
     public static void main(String[] args) throws Exception {
-        String str="7+3*6-5";
+        String str="70+3*6-5";
         ArrayStack2 numStack=new ArrayStack2(10);
         ArrayStack2 opStack=new ArrayStack2(10);
         int index =0;//下标
@@ -83,6 +83,7 @@ public class Calculator {
     }
 
 
+    //public void calculatorNormal(){}
 
 }
 
@@ -154,14 +155,16 @@ class ArrayStack2{
     }
 
     public Boolean isOperate(int oper){
-        return oper == '+' || oper== '-' || oper == '*' || oper == '/';
+        return oper == '+' || oper== '-' || oper == '*' || oper == '/'|| oper == '('|| oper == ')';
     }
 
     public int isPriority(int c){
         if( c == '+' || c== '-'){
             return 0;
-        }if(c == '*' || c == '/'){
+        }if(c == '*' || c == '/' ){
             return 1;
+        }if(c == '('|| c == ')'){
+            return 2;
         }else{
             return -1;
         }
